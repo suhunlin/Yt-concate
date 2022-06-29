@@ -6,11 +6,7 @@ class Pipeline:
         self.steps = steps
 
     def run(self, inputs, utils):
-        data = ['https://www.youtube.com/watch?v=SeXZt5hqe6I',
-                'https://www.youtube.com/watch?v=ML_isAjmxtw',
-                'https://www.youtube.com/watch?v=QfKvT5J3ZSk',
-                'https://www.youtube.com/watch?v=YAvhJNNQ2XQ',
-                ]
+        data = None
         for step in self.steps:
             try:
                 data = step.process(data, inputs, utils)
