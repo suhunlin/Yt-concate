@@ -12,20 +12,21 @@ class DownloadCaptions(Step):
         print('DownloadCaptions was born!!!')
 
     def process(self, data, inputs, utils):
-        for url in data:
-            if utils.caption_file_exists(url):
+        for yt in data:
+            if utils.caption_file_exists(yt):
                 print('found existing caption file!!!')
                 continue
             try:
-                source = YouTube(url)
+                source = YouTube(yt.url)
                 language_code = 'a.en'
-                full_filename = utils.get_caption_filepath(url)
+                full_filename = yt.get_caption_filepath()
                 caption_file = self.get_caption(source, language_code)
 
             except (KeyError, AttributeError) as e:
-                print(e,'Error occur in url :', url)
+                print(e, 'Error occur in url :', yt.url)
                 continue
             self.save_to_text_file(full_filename, caption_file)
+        return data
 
     def get_caption(self, source, language_code):
         en_caption = source.captions.get_by_language_code(language_code)
@@ -39,4 +40,3 @@ class DownloadCaptions(Step):
         text_file = open(full_filename, "w", encoding='utf-8')
         text_file.write(caption_file)
         text_file.close()
-

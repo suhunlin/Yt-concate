@@ -7,9 +7,9 @@ class Pipeline:
 
     def run(self, inputs, utils):
         data = None
-        for step in self.steps:
-            try:
+
+        try:
+            for step in self.steps:
                 data = step.process(data, inputs, utils)
-            except StepException as e:
-                print('Step error in ', step, e)
-                break
+        except StepException as e:
+            print(step,'error in ', e)
