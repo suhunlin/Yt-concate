@@ -3,3 +3,7 @@ class Found:
         self.yt = yt
         self.caption = caption
         self.time = time
+
+    def __str__(self):
+        return '<Found class:'+ self.yt.caption_id + '>'
+
